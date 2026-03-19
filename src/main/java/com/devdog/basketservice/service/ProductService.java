@@ -1,18 +1,26 @@
 package com.devdog.basketservice.service;
 
+import com.devdog.basketservice.client.PlatziStoreClient;
+import com.devdog.basketservice.client.response.PlatziProductResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
     //preciso conectar com a api externa
 
-    public void getAllProducts() {
+    private final PlatziStoreClient platziStoreClient;
 
+    public List<PlatziProductResponse> getAllProducts() {
+        return platziStoreClient.getAllProducts();
     }
 
-    public void getProductById(@RequestParam long id) {
-
+    public PlatziProductResponse getProductById(@RequestParam long id) {
+        return platziStoreClient.getProductById(id);
     }
 }
