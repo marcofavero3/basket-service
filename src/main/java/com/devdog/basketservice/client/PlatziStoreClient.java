@@ -3,6 +3,7 @@ package com.devdog.basketservice.client;
 import com.devdog.basketservice.client.response.PlatziProductResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ public interface PlatziStoreClient {
     List<PlatziProductResponse> getAllProducts();
 
     @GetMapping("/products/{id}")
-    PlatziProductResponse getProductById(Long productId);
+    PlatziProductResponse getProductById(@PathVariable("id") Long id);
 }
