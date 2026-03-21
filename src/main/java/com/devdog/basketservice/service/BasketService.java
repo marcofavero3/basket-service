@@ -2,6 +2,7 @@ package com.devdog.basketservice.service;
 
 import com.devdog.basketservice.client.response.PlatziProductResponse;
 import com.devdog.basketservice.controllers.request.BasketRequest;
+import com.devdog.basketservice.controllers.request.PaymentRequest;
 import com.devdog.basketservice.entity.Basket;
 import com.devdog.basketservice.entity.Product;
 import com.devdog.basketservice.entity.Status;
@@ -71,6 +72,14 @@ public class BasketService {
 
         savedBasket.setProducts(products);
         savedBasket.calcularTotalPrice();
+
+        return basketRepository.save(savedBasket);
+    }
+
+    public Basket payBasket(String id, PaymentRequest request) {
+        Basket savedBasket = getBasketById(id);
+        savedBasket.setPaymentMethod(request.getPaymentMethod());
+        savedBasket.setStatus(Status.SOLD);
 
         return basketRepository.save(savedBasket);
     }
